@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"arm_lcd16x2_lib_test\stm32f1xx_hal_cortex.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_dma.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_rcc.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_tim.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_flash.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_flash_ex.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_rcc_ex.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_gpio.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_pwr.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_tim_ex.o"
+"arm_lcd16x2_lib_test\startup_stm32f103x6.o"
+"arm_lcd16x2_lib_test\system_stm32f1xx.o"
+"arm_lcd16x2_lib_test\stm32f1xx_hal_msp.o"
+"arm_lcd16x2_lib_test\stm32f1xx_it.o"
+"arm_lcd16x2_lib_test\main.o"
+"arm_lcd16x2_lib_test\dwt_stm32_delay.o"
+"arm_lcd16x2_lib_test\lcd.o"
+--library_type=microlib --strict --scatter "arm_lcd16x2_lib_test\arm_lcd16x2_lib_test.sct"
+
+--diag_suppress=L6329 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "arm_lcd16x2_lib_test.map" -o arm_lcd16x2_lib_test\arm_lcd16x2_lib_test.axf

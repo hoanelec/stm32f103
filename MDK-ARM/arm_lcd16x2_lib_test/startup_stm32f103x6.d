@@ -1,0 +1,1 @@
+arm_lcd16x2_lib_test\startup_stm32f103x6.o: startup_stm32f103x6.s
