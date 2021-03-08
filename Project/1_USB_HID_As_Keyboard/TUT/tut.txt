@@ -1,0 +1,5 @@
+Open Middlewares -> ST -> -> ... -> usbd_hid.c
+Move to USBD_HID_CfgFSDesc[USB_HID_CONFIG_DESC_SIZ] at nInterfaceProtocol adjust to 0x01
+Scroll down to HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE] function adjust to the array like keybrd.h and change HID_MOUSE_DESC_SIZE to 63 
+In main.c include usbd_hid.h
+

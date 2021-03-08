@@ -61,8 +61,8 @@ all: main-build
 main-build: 8_UART_INT.elf secondary-outputs
 
 # Tool invocations
-8_UART_INT.elf: $(OBJS) $(USER_OBJS) C:\Users\MICTEL\Desktop\STM32\Basic\8_UART_INT\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "8_UART_INT.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MICTEL\Desktop\STM32\Basic\8_UART_INT\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="8_UART_INT.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+8_UART_INT.elf: $(OBJS) $(USER_OBJS) C:\Users\MICTEL\Desktop\STM32\hub\stm32f103\Basic\8_UART_INT\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "8_UART_INT.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MICTEL\Desktop\STM32\hub\stm32f103\Basic\8_UART_INT\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="8_UART_INT.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
