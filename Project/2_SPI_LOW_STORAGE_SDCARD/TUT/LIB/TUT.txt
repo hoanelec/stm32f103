@@ -1,0 +1,3 @@
+For low storage cards (my own 2GB card) use the library in LIB folder. Don't forget to config CS Pin and set the pin at fatfs_sd.c file  (B0)
+MicroSD card adapter 5V
+TF board V1 (2 mode) 3.3V 
