@@ -60,13 +60,11 @@ void Send_74HC595(uint8_t dataByte)
 	{
 		HAL_GPIO_WritePin(GPIOA, DATA_Pin, (dataByte>>i) & 0x01);
 		HAL_GPIO_WritePin(GPIOA, CLOCK_Pin, GPIO_PIN_SET);
-		HAL_Delay(10);
 		HAL_GPIO_WritePin(GPIOA, CLOCK_Pin, GPIO_PIN_RESET);
-		HAL_Delay(10);
 	}
 	HAL_GPIO_WritePin(GPIOA, LATCH_Pin, GPIO_PIN_SET);
-	HAL_Delay(10);
 	HAL_GPIO_WritePin(GPIOA, LATCH_Pin, GPIO_PIN_RESET);
+	HAL_Delay(100);
 
 }
 /* USER CODE END 0 */
@@ -100,10 +98,17 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
-
+// ROW 0 COL 1 => ACTIVE
   /* USER CODE END 2 */
-
+//  Send_74HC595(0xff);
+	  Send_74HC595(0x01);//row
+	//  Send_74HC595(0xff);
+//	  Send_74HC595(0xff);
+//	  Send_74HC595(0xff);
+//	  Send_74HC595(0xff);
+//	  Send_74HC595(0xff);
+//	  Send_74HC595(0xff);
+	  Send_74HC595(0x00);//col
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -112,10 +117,12 @@ int main(void)
 
 	//  	  Send_74HC595(0x00);
     /* USER CODE BEGIN 3 */
-	  Send_74HC595(0x00);
+	 // Send_74HC595(0x00);
+
+
+
 
 		//  Send_74HC595(0xff);
-		  Send_74HC595(0xff);
   }
   /* USER CODE END 3 */
 }
