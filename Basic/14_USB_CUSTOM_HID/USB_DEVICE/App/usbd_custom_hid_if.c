@@ -32,7 +32,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+extern void USB_RX_Interrupt(void);
 /* USER CODE END PV */
 
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
@@ -92,10 +92,26 @@
 __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
 {
   /* USER CODE BEGIN 0 */
-		0xA1, 0x01,
-     // Output (Data, Array, Abs)
+		0x06, 0x00, 0xFF,      // Usage Page = 0xFF00 (Vendor Defined Page 1)
+		  0x09, 0x01,             // Usage (Vendor Usage 1)
+		  0xA1, 0x01,             // Collection (Application)
+		  // Input report
+		  0x19, 0x01,             // Usage Minimum
+		  0x29, 0x40,             // Usage Maximum
+		  0x15, 0x00,             // Logical Minimum (data bytes in the report may have minimum value = 0x00)
+		  0x26, 0xFF, 0x00,       // Logical Maximum (data bytes in the report may have maximum value = 0x00FF = unsigned 255)
+		  0x75, 0x08,             // Report Size: 8-bit field size
+		  0x95, CUSTOM_HID_EPIN_SIZE,// Report Count
+		  0x81, 0x02,             // Input (Data, Array, Abs)
+		  // Output report
+		  0x19, 0x01,             // Usage Minimum
+		  0x29, 0x40,             // Usage Maximum
+		  0x75, 0x08,             // Report Size: 8-bit field size
+		  0x95, CUSTOM_HID_EPOUT_SIZE,// Report Count
+		  0x91, 0x02,             // Output (Data, Array, Abs)
+		  0xC0
   /* USER CODE END 0 */
-  0xC0    /*     END_COLLECTION	             */
+     /*     END_COLLECTION	             */
 };
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
@@ -178,19 +194,8 @@ static int8_t CUSTOM_HID_DeInit_FS(void)
 static int8_t CUSTOM_HID_OutEvent_FS(uint8_t event_idx, uint8_t state)
 {
   /* USER CODE BEGIN 6 */
-//	if(buffer[0] == '0')
-//				 HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
-//
-//		if(buffer[0] == '1')
-//				  	 HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-//
-//		if(buffer[0] == '2')
-//				  	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_2);
-//
-//		if(buffer[0] == '3')
-//				  	 HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_3);
-		  return (USBD_OK);
-
+	USB_RX_Interrupt();
+  return (USBD_OK);
   /* USER CODE END 6 */
 }
 

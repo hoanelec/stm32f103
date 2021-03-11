@@ -43,12 +43,24 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t USBD_CUSTOM_HID_SendReport(USBD_HandleTypeDef *pdev, uint8_t *report, uint16_t len);
-void USB_RX_Interrupt(void);
+uint8_t USBD_CUSTOM_HID_SendReport     (USBD_HandleTypeDef  *pdev, uint8_t *report, uint16_t len);
+void 	USB_RX_Interrupt(void);
 uint8_t usb_rx_buffer[64];
-uint8_t send_data = 32, i;
+uint8_t send_data=32,i;
 
-extern USBD_HandleTypeDef hUsbDeviceFS;
+extern 	USBD_HandleTypeDef hUsbDeviceFS;
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
 void USB_RX_Interrupt(void)
 {
 	USBD_CUSTOM_HID_HandleTypeDef *myusb=(USBD_CUSTOM_HID_HandleTypeDef *)hUsbDeviceFS.pClassData;
@@ -65,19 +77,6 @@ void USB_RX_Interrupt(void)
 		usb_rx_buffer[i]=myusb->Report_buf[i+1];
 	}
 }
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
 /* USER CODE END 0 */
 
 /**
@@ -120,11 +119,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	  USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS, &send_data, 1);
-//	  		HAL_Delay(2000);
-//	  		if (++send_data == 128) {
-//	  			send_data = 32;
-//	  		}
+	  USBD_CUSTOM_HID_SendReport(&hUsbDeviceFS,&send_data,1);
+	  		HAL_Delay(2000);
+	  		if(++send_data==128)
+	  		{
+	  			send_data=32;
+	  		}
   }
   /* USER CODE END 3 */
 }
@@ -181,22 +181,11 @@ void SystemClock_Config(void)
   */
 static void MX_GPIO_Init(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
-
-  /*Configure GPIO pins : PA0 PA1 PA2 PA3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 

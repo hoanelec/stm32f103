@@ -66,8 +66,8 @@
 #define USBD_VID     1155
 #define USBD_LANGID_STRING     1033
 #define USBD_MANUFACTURER_STRING     "STMicroelectronics"
-#define USBD_PID_FS     22355
-#define USBD_PRODUCT_STRING_FS     "STM32 Custom Human interface 2"
+#define USBD_PID_FS     22372
+#define USBD_PRODUCT_STRING_FS     "STM32F103 Custom Human interface"
 #define USBD_CONFIGURATION_STRING_FS     "Custom HID Config"
 #define USBD_INTERFACE_STRING_FS     "Custom HID Interface"
 
