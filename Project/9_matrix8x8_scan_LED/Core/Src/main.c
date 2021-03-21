@@ -133,8 +133,8 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-//  HAL_GPIO_WritePin(GPIOA, R6_Pin, GPIO_PIN_SET);//ROW 1 HIGH
-//  HAL_GPIO_WritePin(GPIOA, R5_Pin, GPIO_PIN_SET);//ROW 1 HIGH
+  HAL_GPIO_WritePin(GPIOA, R6_Pin, GPIO_PIN_SET);//ROW 1 HIGH
+  HAL_GPIO_WritePin(GPIOA, R5_Pin, GPIO_PIN_SET);//ROW 1 HIGH
 //
 //  HAL_GPIO_WritePin(GPIOB, C6_Pin, GPIO_PIN_SET);//ROW 1 HIGH
   /* USER CODE END 2 */
@@ -143,7 +143,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1) {
     /* USER CODE END WHILE */
-		 Matrix8x8_ShiftRL(0);
+		// Matrix8x8_ShiftRL(0);
     /* USER CODE BEGIN 3 */
 
 	}

@@ -1,0 +1,8 @@
+matrix8x8.c:55:6:dl	16	static
+matrix8x8.c:59:9:rotateLeft	16	static
+matrix8x8.c:64:9:shiftRight	16	static
+matrix8x8.c:67:9:shifLeft	16	static
+matrix8x8.c:71:9:scanLeft	16	static
+matrix8x8.c:74:6:Matrix8x8_Display_Symbol	32	static
+matrix8x8.c:94:6:Matrix8x8_ShifLR	48	static
+matrix8x8.c:135:6:Matrix8x8_ShiftRL	48	static
