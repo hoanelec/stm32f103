@@ -52,6 +52,25 @@ unsigned int symHEX[][8] = { { 0x18, 0x3C, 0x66, 0x66, 0x7E, 0x66, 0x66, 0x66 },
 		{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, // khoảng trắng
 		{ 0x00, 0x66, 0xFF, 0xFF, 0x7E, 0x3C, 0x18, 0x00 } // hình trái tim
 };
+void dl(uint16_t tm) {
+	while (--tm)
+		;
+}
+uint8_t rotateLeft(uint8_t n, uint8_t d) {
+	/* In n<<d, last d bits are 0. To put first 3 bits of n at
+	 last, do bitwise or of n<<d with n >>(INT_BITS - d) */
+	return ((n << d) & 0xFF | (n >> (8 - d)));
+}
+uint8_t shiftRight(uint8_t byte, uint8_t bit) {
+	return byte >> bit;
+}
+uint8_t shifLeft(uint8_t byte, uint8_t bit)
+{
+	return (byte<<bit)&0xff;
+}
+uint8_t scanLeft(uint8_t byte, uint8_t bit) {
+	return (byte << bit) & 0xff;
+}
 void Matrix8x8_Display_Symbol(uint8_t _sym) {
 	for (int r = 0; r < 8; r++) {
 		HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_SET); //ROW 1 HIGH
@@ -61,7 +80,8 @@ void Matrix8x8_Display_Symbol(uint8_t _sym) {
 				HAL_GPIO_WritePin(GPIOA, col[c], bit);
 			else
 				HAL_GPIO_WritePin(GPIOB, col[c], bit);
-			//	Delay_us(150);
+//			dl(5000);
+				Delay_us(150);
 			if (7 == c)
 				HAL_GPIO_WritePin(GPIOA, col[c], GPIO_PIN_RESET);
 			else
@@ -69,130 +89,88 @@ void Matrix8x8_Display_Symbol(uint8_t _sym) {
 		}
 		HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_RESET);
 	}
+
 }
-//uint8_t rotateLeft(uint8_t byte,uint8_t cntBit)
-//{
-//	uint8_t result = byte;
-//	uint8_t temp;
-//	for(int b = 1;b<= cntBit;b++)
-//	{
-//		temp = result <<1;
-//		result = temp;
-//	}
-//	return result;
-//}
-uint8_t rotateLeft(uint8_t n, uint8_t d) {
-	/* In n<<d, last d bits are 0. To put first 3 bits of n at
-	 last, do bitwise or of n<<d with n >>(INT_BITS - d) */
-	return ((n << d) & 0xFF | (n >> (8 - d)));
-}
-uint8_t scanLeft(uint8_t byte, uint8_t bit) {
-	return (byte << bit) & 0xff;
-}
-void Matrix8x8_ShiftRL(uint8_t _sym) {
-//	for (int i = 0; i < 8; i++) {
-//		for (int r = 0; r < 8; r++) {
-//			HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_SET); //ROW 1 HIGH
-//			for (int c = 0; c < 8; c++) {
-//				uint8_t hx = symHEX[_sym][r] << i;
-//				uint8_t bit = ((symHEX[_sym][r] << i) >> (7 - c)) & 0x01;
-//				if (7 == c) // COL1(RB9) -> COL7(RB3), COL8(RA15)
-//					HAL_GPIO_WritePin(GPIOA, col[c], bit);
-//				else
-//					HAL_GPIO_WritePin(GPIOB, col[c], bit);
-//				Delay_us(150);
-//				if (7 == c)
-//					HAL_GPIO_WritePin(GPIOA, col[c], GPIO_PIN_RESET);
-//				else
-//					HAL_GPIO_WritePin(GPIOB, col[c], GPIO_PIN_RESET);
-//			}
-//			HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_RESET);
-//			//	HAL_Delay(10);
-//			//	Delay_us(1500);
-//		}
-////
-////			//	Delay_us(1500);
-////		}
-//		HAL_Delay(10);
-//
-//	}
-	//{ 0x18, 0x3C, 0x66, 0x66, 0x7E, 0x66, 0x66,	0x66 }
-	//Vong lap shift bit
-	for (int i = 0; i < 8; i++) {
-
-		//Vong lap xuat tung dvi mang[8]
-		for (int r = 0; r < 8; r++) {
-
-			//Bat tung hang
-			HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_SET); //ROW 1 HIGH
-			uint8_t hx = scanLeft(symHEX[_sym][r], i);
-//			uint8_t hx = rotateLeft(symHEX[_sym][r],i);
-			//(dt << dich)| (symHEX[_sym][r] >> 7);
-			//Vong lap xuat bit tung dvi cua mang
-			for (int c = 0; c < 8; c++) {
-				uint8_t bit = ((hx << c) >> 7) & 0x01;
-
-				//Xuat tung cot
-				if (7 == c) // COL1(RB9) -> COL7(RB3), COL8(RA15)
-					HAL_GPIO_WritePin(GPIOA, col[c], bit);
-				else
-					HAL_GPIO_WritePin(GPIOB, col[c], bit);
-				Delay_us(150);
-				if (7 == c)
-					HAL_GPIO_WritePin(GPIOA, col[c], GPIO_PIN_RESET);
-				else
-					HAL_GPIO_WritePin(GPIOB, col[c], GPIO_PIN_RESET);
-			}
-
-			HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_RESET);
-		}
-	}
-	for (int i = 0; i < 8; i++) {
-
-		//Vong lap xuat tung dvi mang[8]
-		for (int r = 0; r < 8; r++) {
-
-			//Bat tung hang
-			HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_SET); //ROW 1 HIGH
-			uint8_t hx = scanLeft(symHEX[_sym][r], i);
-			//			uint8_t hx = rotateLeft(symHEX[_sym][r],i);
-			//(dt << dich)| (symHEX[_sym][r] >> 7);
-			//Vong lap xuat bit tung dvi cua mang
-			for (int c = 7; c >= 0; c--) {
-					//c = 7 j = 0
-					//c= 6  j = 1
-					//c= 0  j = 7
-				1000 0000
-				for(int j = 7-c;j>=0;j--){
-				    j = 0,c7 = 1
-				}
-					//Xuat tung cot
+void Matrix8x8_ShiftLR(uint8_t _sym)
+{
+		for (int mv = 7; mv >= 0; mv--) {
+			for (int i = 0; i < 8; i++) {
+				HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_SET); //ROW 1 HIGH
+				for (int j = 0; j < 8; j++) {
+					uint8_t bit = (shifLeft(symHEX[_sym][i], mv) >> (7 - j)) & 0x01;
+					//uint8_t bit = (symHEX[_sym][i] >> (7 - j)) & 0x01;
 					if (7 == j) // COL1(RB9) -> COL7(RB3), COL8(RA15)
 						HAL_GPIO_WritePin(GPIOA, col[j], bit);
 					else
 						HAL_GPIO_WritePin(GPIOB, col[j], bit);
-					Delay_us(150);
+//					dl(5000);
+						Delay_us(250);
 					if (7 == j)
 						HAL_GPIO_WritePin(GPIOA, col[j], GPIO_PIN_RESET);
 					else
 						HAL_GPIO_WritePin(GPIOB, col[j], GPIO_PIN_RESET);
 				}
-//				uint8_t bit = ((hx << c) >> 7) & 0x01;
-//
-//				//Xuat tung cot
-//				if (7 == c) // COL1(RB9) -> COL7(RB3), COL8(RA15)
-//					HAL_GPIO_WritePin(GPIOA, col[c], bit);
-//				else
-//					HAL_GPIO_WritePin(GPIOB, col[c], bit);
-//				Delay_us(150);
-//				if (7 == c)
-//					HAL_GPIO_WritePin(GPIOA, col[c], GPIO_PIN_RESET);
-//				else
-//					HAL_GPIO_WritePin(GPIOB, col[c], GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_RESET); //ROW 1 HIGH
 			}
-
-			HAL_GPIO_WritePin(GPIOA, row[r], GPIO_PIN_RESET);
+		}
+		for (int mv = 0; mv < 8; mv++)
+						for (int i = 0; i < 8; i++) {
+							HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_SET); //ROW 1 HIGH
+							for (int j = 0; j < 8; j++) {
+								uint8_t bit = (shiftRight(symHEX[_sym][i], mv) >> (7 - j))& 0x01;
+								if (7 == j) // COL1(RB9) -> COL7(RB3), COL8(RA15)
+									HAL_GPIO_WritePin(GPIOA, col[j], bit);
+								else
+									HAL_GPIO_WritePin(GPIOB, col[j], bit);
+//								dl(5000);
+									Delay_us(250);
+								if (7 == j)
+									HAL_GPIO_WritePin(GPIOA, col[j], GPIO_PIN_RESET);
+								else
+									HAL_GPIO_WritePin(GPIOB, col[j], GPIO_PIN_RESET);
+							}
+							HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_RESET); //ROW 1 HIGH
+						}
+}
+void Matrix8x8_ShiftRL(uint8_t _sym) {
+	for (int mv = 7; mv >= 0; mv--)
+			for (int i = 0; i < 8; i++) {
+				HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_SET); //ROW 1 HIGH
+				for (int j = 0; j < 8; j++) {
+					uint8_t bit = (shiftRight(symHEX[_sym][i], mv) >> (7 - j))& 0x01;
+					if (7 == j) // COL1(RB9) -> COL7(RB3), COL8(RA15)
+						HAL_GPIO_WritePin(GPIOA, col[j], bit);
+					else
+						HAL_GPIO_WritePin(GPIOB, col[j], bit);
+					dl(5000);
+					//	Delay_us(150);
+					if (7 == j)
+						HAL_GPIO_WritePin(GPIOA, col[j], GPIO_PIN_RESET);
+					else
+						HAL_GPIO_WritePin(GPIOB, col[j], GPIO_PIN_RESET);
+				}
+				HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_RESET); //ROW 1 HIGH
+			}
+	for (int mv = 0; mv < 8; mv++) {
+		for (int i = 0; i < 8; i++) {
+			HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_SET); //ROW 1 HIGH
+			for (int j = 0; j < 8; j++) {
+				uint8_t bit = (scanLeft(symHEX[_sym][i], mv) >> (7 - j)) & 0x01;
+				//uint8_t bit = (symHEX[_sym][i] >> (7 - j)) & 0x01;
+				if (7 == j) // COL1(RB9) -> COL7(RB3), COL8(RA15)
+					HAL_GPIO_WritePin(GPIOA, col[j], bit);
+				else
+					HAL_GPIO_WritePin(GPIOB, col[j], bit);
+				dl(5000);
+				//	Delay_us(150);
+				if (7 == j)
+					HAL_GPIO_WritePin(GPIOA, col[j], GPIO_PIN_RESET);
+				else
+					HAL_GPIO_WritePin(GPIOB, col[j], GPIO_PIN_RESET);
+			}
+			HAL_GPIO_WritePin(GPIOA, row[i], GPIO_PIN_RESET); //ROW 1 HIGH
 		}
 	}
-	HAL_Delay(100);
+
+
 }

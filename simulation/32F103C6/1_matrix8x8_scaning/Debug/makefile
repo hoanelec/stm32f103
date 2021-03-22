@@ -62,8 +62,8 @@ all:
 main-build: 1_matrix8x8_scaning.elf secondary-outputs
 
 # Tool invocations
-1_matrix8x8_scaning.elf: $(OBJS) $(USER_OBJS) E:\3_Arm\simulation\32F103C6\1_matrix8x8_scaning\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "1_matrix8x8_scaning.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"E:\3_Arm\simulation\32F103C6\1_matrix8x8_scaning\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1_matrix8x8_scaning.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+1_matrix8x8_scaning.elf: $(OBJS) $(USER_OBJS) C:\Users\MICTEL\Desktop\STM32\hub\stm32f103\simulation\32F103C6\1_matrix8x8_scaning\STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "1_matrix8x8_scaning.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MICTEL\Desktop\STM32\hub\stm32f103\simulation\32F103C6\1_matrix8x8_scaning\STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1_matrix8x8_scaning.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
