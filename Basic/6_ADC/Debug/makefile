@@ -61,8 +61,8 @@ all: main-build
 main-build: 6_ADC.elf secondary-outputs
 
 # Tool invocations
-6_ADC.elf: $(OBJS) $(USER_OBJS) C:\Users\MICTEL\Desktop\STM32\Basic\6_ADC\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "6_ADC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MICTEL\Desktop\STM32\Basic\6_ADC\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="6_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+6_ADC.elf: $(OBJS) $(USER_OBJS) C:\Users\MICTEL\Desktop\STM32\hub\stm32f103\Basic\6_ADC\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "6_ADC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MICTEL\Desktop\STM32\hub\stm32f103\Basic\6_ADC\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="6_ADC.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

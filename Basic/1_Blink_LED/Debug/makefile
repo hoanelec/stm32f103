@@ -55,14 +55,15 @@ OBJCOPY_BIN += \
 
 
 # All Target
-all: main-build
+all:
+	+@$(MAKE) --no-print-directory main-build && $(MAKE) --no-print-directory post-build
 
 # Main-build Target
 main-build: 1_Blink_LED.elf secondary-outputs
 
 # Tool invocations
-1_Blink_LED.elf: $(OBJS) $(USER_OBJS) C:\Users\MICTEL\Desktop\STM32\Basic\1_Blink_LED\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "1_Blink_LED.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MICTEL\Desktop\STM32\Basic\1_Blink_LED\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1_Blink_LED.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+1_Blink_LED.elf: $(OBJS) $(USER_OBJS) C:\Users\MICTEL\Desktop\STM32IDE\STM32F103C8\hub\stm32f103\Basic\1_Blink_LED\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "1_Blink_LED.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\MICTEL\Desktop\STM32IDE\STM32F103C8\hub\stm32f103\Basic\1_Blink_LED\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1_Blink_LED.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -86,6 +87,10 @@ clean:
 	-$(RM) *
 	-@echo ' '
 
+post-build:
+	arm-none-eabi-objcopy -O ihex 1_Blink_LED.elf 1_Blink_LED.hex
+	-@echo ' '
+
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
@@ -96,6 +101,6 @@ warn-no-linker-script-specified:
 	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
 
 .PHONY: all clean dependents fail-specified-linker-script-missing warn-no-linker-script-specified
-.SECONDARY:
+.SECONDARY: post-build
 
 -include ../makefile.targets
