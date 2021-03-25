@@ -1,0 +1,2 @@
+adc0804.c:16:15:Read_ADC_PIN	16	static
+adc0804.c:31:15:ADC0804_Read	16	static

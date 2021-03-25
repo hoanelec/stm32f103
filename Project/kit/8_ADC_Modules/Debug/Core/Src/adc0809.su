@@ -1,0 +1,2 @@
+adc0809.c:2:9:Read_ADC_PIN	16	static
+adc0809.c:18:9:ADC0809_Read	24	static
