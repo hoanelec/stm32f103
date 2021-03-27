@@ -1,0 +1,7 @@
+infraredSensor.c:3:6:Delay_us	16	static
+infraredSensor.c:10:6:Timer_1us_Init	48	static
+infraredSensor.c:37:6:SendPart	24	static
+infraredSensor.c:58:10:NEC_Infrared_Send_Data	16	static
+infraredSensor.c:88:9:NEC_Infrared_get_Data	16	static
+infraredSensor.c:93:10:NEC_Infrared_Read_specify	32	static
+infraredSensor.c:155:10:NEC_Infrared_Read	24	static
