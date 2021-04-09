@@ -1,0 +1,11 @@
+main.c:73:6:delay_us	24	static
+main.c:80:6:Trigger_10us	88	static
+main.c:88:10:Echo_Read	16	static
+main.c:99:7:Distance_In_Centimeter	16	static
+main.c:110:5:main	88	static
+main.c:165:6:SystemClock_Config	72	static
+main.c:204:13:MX_TIM1_Init	32	static
+main.c:250:13:MX_TIM2_Init	32	static
+main.c:295:13:MX_USART1_UART_Init	8	static
+main.c:328:13:MX_GPIO_Init	40	static
+main.c:373:6:Error_Handler	4	static,ignoring_inline_asm
