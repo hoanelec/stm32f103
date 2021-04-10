@@ -1,0 +1,8 @@
+mpu6050.c:4:6:initI2C	8	static
+mpu6050.c:8:6:setClockSource	120	static
+mpu6050.c:12:6:setSeepEnable	112	static
+mpu6050.c:16:6:setFullScaleGyroRange	120	static
+mpu6050.c:20:6:setFullScaleAccelRange	120	static
+mpu6050.c:24:9:deviceIsAvailable	104	static
+mpu6050.c:32:6:initialize	8	static
+mpu6050.c:39:6:getMotion6	112	static

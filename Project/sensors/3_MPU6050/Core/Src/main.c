@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "mpu6050.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,7 +34,7 @@
 /* USER CODE BEGIN PD */
 #define READ 0
 #define WRITE 1
-#define DEVIDEADDRESS 0x68
+//#define DEVIDEADDRESS 0x68
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,6 +47,7 @@ I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN PV */
  uint8_t check;
+ uint16_t ax,ay,az,gx,gy,gz;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,7 +93,9 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
+  initI2C(hi2c1);
+  initialize();
+  HAL_Delay(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,8 +105,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_I2C_Mem_Read(&hi2c1, DEVIDEADDRESS<<1, 0x75, 1, &check, 1, 1000);
-	  HAL_I2C_Mem_Write(&hi2c1, DEVIDEADDRESS<<1|WRITE, 0x6B, 1, , Size, Timeout)
+	//  HAL_I2C_R
+	 // HAL_I2C_Mem_Read(&hi2c1, MPU6050_ADDRESS<<1, 0x75, 1, &check, 1, 1000);
+	  if(deviceIsAvailable())
+	  {
+
+		  uint8_t dBytePwr = i2cReadByte(MPU6050_ADDRESS, MPU6050_RA_PWR_MGMT_1, 1000, hi2c1);
+		  HAL_Delay(1);
+		  getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+	  }
+	//  HAL_I2C_Mem_Write(&hi2c1, DEVIDEADDRESS<<1|WRITE, 0x6B, 1, , Size, Timeout)
 
 	  HAL_Delay(1000);
   }
