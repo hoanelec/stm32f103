@@ -47,7 +47,8 @@ I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN PV */
  uint8_t check;
- uint16_t ax,ay,az,gx,gy,gz;
+ int16_t ax_raw,ay_raw,az_raw,gx_raw,gy_raw,gz_raw;
+ float ax,ay,az,gx,gy,gz;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,7 +113,15 @@ int main(void)
 
 		  uint8_t dBytePwr = i2cReadByte(MPU6050_ADDRESS, MPU6050_RA_PWR_MGMT_1, 1000, hi2c1);
 		  HAL_Delay(1);
-		  getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+		  getMotion6(&ax_raw, &ay_raw, &az_raw, &gx_raw, &gy_raw, &gz_raw);
+		  ax = ax_raw/16384.0f;
+		  ay = ay_raw/16384.0f;
+		  az = az_raw/16384.0f;
+
+		  gx = gx_raw/131.0f;
+		  gy = gy_raw/131.0f;
+		  gz = gz_raw/131.0f;
+
 	  }
 	//  HAL_I2C_Mem_Write(&hi2c1, DEVIDEADDRESS<<1|WRITE, 0x6B, 1, , Size, Timeout)
 

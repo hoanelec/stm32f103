@@ -66,5 +66,5 @@ void setFullScaleGyroRange(uint8_t range);
 void setFullScaleAccelRange(uint8_t range);
 uint8_t deviceIsAvailable();
 void initialize();
-void getMotion6(uint16_t *ax, uint16_t *ay, uint16_t *az,uint16_t *gx, uint16_t *gy,uint16_t *gz);
+void getMotion6(int16_t *ax, int16_t *ay, int16_t *az,int16_t *gx, int16_t *gy,int16_t *gz);
 #endif

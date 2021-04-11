@@ -1,4 +1,4 @@
-#include "mpu6050.h"
+	#include "mpu6050.h"
 #include "I2C.h"
 I2C_HandleTypeDef hi2cx;
 void initI2C(I2C_HandleTypeDef _hi2c)
@@ -36,7 +36,7 @@ void initialize()
 	setFullScaleGyroRange(MPU6050_GYRO_FS_SEL_250);
 	setFullScaleAccelRange(MPU6050_ACCL_AFS_SEL_2G);
 }
-void getMotion6(uint16_t *ax, uint16_t *ay, uint16_t *az,uint16_t *gx, uint16_t *gy,uint16_t *gz)
+void getMotion6(int16_t *ax, int16_t *ay, int16_t *az,int16_t *gx, int16_t *gy,int16_t *gz)
 {
 	i2cReadBytes(MPU6050_ADDRESS, MPU6050_RA_ACCEL_XOUT_H,14 , i2cBuffer, 2000, hi2cx);
     *ax = (int16_t)(i2cBuffer[0] << 8 )| i2cBuffer[1];
