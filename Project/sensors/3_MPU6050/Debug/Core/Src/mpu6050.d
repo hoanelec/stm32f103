@@ -22,6 +22,7 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c ../Core/Inc/mpu6050.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/I2C.h
 
 ../Core/Inc/mpu6050.h:
@@ -73,5 +74,7 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c ../Core/Inc/mpu6050.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
+
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
 ../Core/Inc/I2C.h:

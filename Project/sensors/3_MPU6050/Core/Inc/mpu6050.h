@@ -27,6 +27,9 @@
 #define MPU6050_RA_PWR_MGMT_1       0x6B
 #define MPU6050_RA_PWR_MGMT_2       0x6C
 
+#define MPU6050_RA_SMPRT_DIV		0x19
+#define MPU6050_RA_SMPRT_DIV_BIT	7
+#define MPU6050_RA_SMPRT_DIV_LENGTH	8
 
 #define MPU6050_PWR1_DEVICE_RESET_BIT   7
 #define MPU6050_PWR1_SLEEP_BIT          6
@@ -48,6 +51,9 @@
 #define MPU6050_RA_ACCEL_ZOUT_H     0x3F
 #define MPU6050_RA_ACCEL_ZOUT_L     0x40
 
+#define MPU6050_RA_TEMP_OUT_H     0x41
+#define MPU6050_RA_TEMP_OUT_L     0x42
+
 #define MPU6050_RA_GYRO_XOUT_H      0x43
 #define MPU6050_RA_GYRO_XOUT_L      0x44
 #define MPU6050_RA_GYRO_YOUT_H      0x45
@@ -61,10 +67,15 @@
 
 void initI2C(I2C_HandleTypeDef _hi2c);
 void setClockSource(uint8_t sourse);
-void setSeepEnable(uint8_t permit);
+void setSleepEnable(uint8_t permit);
 void setFullScaleGyroRange(uint8_t range);
 void setFullScaleAccelRange(uint8_t range);
 uint8_t deviceIsAvailable();
 void initialize();
 void getMotion6(int16_t *ax, int16_t *ay, int16_t *az,int16_t *gx, int16_t *gy,int16_t *gz);
+float getTemperature();
+uint8_t getScaleGyroRange();
+uint8_t getScaleAccelRange();
+uint8_t getRegGYRO_CONFIG();
+uint8_t getRegACCEL_CONFIG();
 #endif
