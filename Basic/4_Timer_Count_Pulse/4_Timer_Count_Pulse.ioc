@@ -116,4 +116,3 @@ ProjectManager.CustomerFirmwarePackage=
 ProjectManager.DeviceId=STM32F103C8Tx
 ProjectManager.LibraryCopy=1
 PA3.Signal=USART2_RX
-isbadioc=false

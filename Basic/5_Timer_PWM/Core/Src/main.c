@@ -109,14 +109,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  for(pwm = 0; pwm <200 ; pwm++) // 0 - 200 equivalent to 0-100% duty
-	  {
-		  __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,pwm);
-		  __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,pwm);
-		  __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,pwm);
-		  __HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,pwm);
-		  HAL_Delay(100);
-	  }
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

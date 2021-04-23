@@ -5,10 +5,24 @@ void SendUnsignedNumber(uint32_t number,UART_HandleTypeDef _huart)
 	uint8_t l = sprintf(uartBuffer,"%lu",number);
 	HAL_UART_Transmit(&_huart, (uint8_t *)uartBuffer, l, 500);
 }
+void SendUnsignedNumberLn(uint32_t number,UART_HandleTypeDef _huart)
+{
+	memset(uartBuffer,0,50);
+	uint8_t l = sprintf(uartBuffer,"%lu",number);
+	HAL_UART_Transmit(&_huart, (uint8_t *)uartBuffer, l, 500);
+	HAL_UART_Transmit(&_huart, (uint8_t *)"\n", 2, 50);
+
+}
 void SendConstChar(const char* constChar,UART_HandleTypeDef _huart)
 {
 	memset(uartBuffer,0,50);
 	HAL_UART_Transmit(&_huart,(uint8_t *)constChar,strlen((const char*)constChar),200);
+}
+void SendConstCharLn(const char* constChar,UART_HandleTypeDef _huart)
+{
+	memset(uartBuffer,0,50);
+	HAL_UART_Transmit(&_huart,(uint8_t *)constChar,strlen((const char*)constChar),200);
+		HAL_UART_Transmit(&_huart, (uint8_t *)"\n", 2, 50);
 }
 void SendFloat(float num,UART_HandleTypeDef _huart)
 {

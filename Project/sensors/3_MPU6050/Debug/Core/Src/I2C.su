@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 I2C.c:5:9:i2cReadByte	40	static
 I2C.c:11:6:i2cWriteByte	40	static
 I2C.c:18:6:i2cReadBytes	32	static
@@ -5,3 +6,12 @@ I2C.c:23:6:i2cWriteBits	128	static
 I2C.c:32:6:i2cWriteBit	128	static
 I2C.c:53:9:i2cReadBit	120	static
 I2C.c:58:9:i2cReadBits	120	static
+=======
+I2C.c:3:6:i2cReadBytes	32	static
+I2C.c:8:9:i2cReadByte	40	static
+I2C.c:14:6:i2cWriteByte	40	static
+I2C.c:18:6:i2cWriteBits	128	static
+I2C.c:27:6:i2cWriteBit	128	static
+I2C.c:49:9:i2cReadBit	120	static
+I2C.c:54:9:i2cReadBits	120	static
+>>>>>>> 8121561a1ff12e5ce55577bf8bd42b5600f67899

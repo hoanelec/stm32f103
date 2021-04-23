@@ -1,7 +1,15 @@
 #include "I2C.h"
 #include "math.h"
+<<<<<<< HEAD
 #include <string.h>
 
+=======
+void i2cReadBytes(uint8_t devAddr,uint8_t regAddr,uint16_t bytes,uint8_t *buffer,uint16_t timeout,I2C_HandleTypeDef hi2c)
+{
+	memset(buffer,0,BUFFER_LENGTH);
+	HAL_I2C_Mem_Read(&hi2c, devAddr<<1, regAddr, 1, buffer, bytes, 1000);
+}
+>>>>>>> 8121561a1ff12e5ce55577bf8bd42b5600f67899
 uint8_t i2cReadByte(uint8_t devAddr,uint8_t regAddr,uint16_t timeout,I2C_HandleTypeDef hi2c)
 {
 	uint8_t dByte;
@@ -37,6 +45,10 @@ void i2cWriteBit(uint8_t devAddr,uint8_t regAddr,uint8_t data,uint8_t bitIndex ,
 	dByte &= ~bMask;
 	dByte |= data;
 	i2cWriteByte(devAddr, regAddr, dByte, timeout, hi2c);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8121561a1ff12e5ce55577bf8bd42b5600f67899
 }
 /*
 uint8_t i2cReadWord(uint8_t devAddr,uint8_t regAddr,uint16_t timeout,I2C_HandleTypeDef hi2c)

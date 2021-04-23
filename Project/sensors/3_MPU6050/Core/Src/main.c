@@ -102,6 +102,7 @@ int main(void) {
 	initI2C(hi2c1);
 	initialize();
 
+<<<<<<< HEAD
 	while(!deviceIsAvailable());
 	/* USER CODE END 2 */
 
@@ -119,6 +120,24 @@ int main(void) {
 		gx = gx_raw / 131.0f;
 		gy = gy_raw / 131.0f;
 		gz = gz_raw / 131.0f;
+=======
+    /* USER CODE BEGIN 3 */
+	//  HAL_I2C_R
+	 // HAL_I2C_Mem_Read(&hi2c1, MPU6050_ADDRESS<<1, 0x75, 1, &check, 1, 1000);
+	  while(!deviceIsAvailable()){}
+
+		//  uint8_t dBytePwr = i2cReadByte(MPU6050_ADDRESS, MPU6050_RA_PWR_MGMT_1, 1000, hi2c1);
+		  HAL_Delay(1);
+		  getMotion6(&ax_raw, &ay_raw, &az_raw, &gx_raw, &gy_raw, &gz_raw);
+		  ax = ax_raw/16384.0f;
+		  ay = ay_raw/16384.0f;
+		  az = az_raw/16384.0f;
+
+		  gx = gx_raw/131.0f;
+		  gy = gy_raw/131.0f;
+		  gz = gz_raw/131.0f;
+	//  HAL_I2C_Mem_Write(&hi2c1, DEVIDEADDRESS<<1|WRITE, 0x6B, 1, , Size, Timeout)
+>>>>>>> 8121561a1ff12e5ce55577bf8bd42b5600f67899
 
 		temp = getTemperature();
 		HAL_Delay(1000);
